@@ -6,8 +6,9 @@ class kTextMaterial extends kMaterial {
 
 class kText {
 
-    align   = [LEFT, TOP];
-    font    = 'Georgia';
+    align    = [LEFT, TOP];
+    font     = 'Georgia';
+    material = new kTextMaterial;
 
     constructor(txt = "", size = 1, x = 0, y = 0) {
         this.txt    = txt;
@@ -27,7 +28,10 @@ class kText {
         textSize(this.size);
         textAlign(this.align[0], this.align[1]);
         textFont(this.font);
+        fill(this.material.color);
+        strokeWeight(this.material.weight);
 
+        this.width  = textWidth(this.txt);
         text(this.txt, this.x, this.y);
     }
 

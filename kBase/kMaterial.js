@@ -20,8 +20,8 @@ class kMaterial {
      * @param {int} b Blue
      * @param {int} a Alpha
      */
-    setFill(r, g, b, a = 255) {
-        this.fill = [r, g, b, a];
+    setColor(r, g, b, a = 255) {
+        this.color = [r, g, b, a];
     }
     
     /**
