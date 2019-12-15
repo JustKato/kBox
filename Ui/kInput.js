@@ -8,7 +8,17 @@ var INPUT_TYPE = {
 class kUi {
     constructor (x, y, w, h = w, tl = 0, tr = tl, br = tr, bl = br) {
         this.renderer     = new kRect(x, y, w, h, tl, tr, br, bl); // Create the renderer
+        this.highlight    = new kMaterial();
+        this.material     = this.renderer.material;
         this.transform    = this.renderer.transform; // Reference the transform
+    }
+
+    /**
+     * Switch the interaction material
+     * @param {kMaterial} highlight The material to switch to whenever the UI element is interacted with
+     */
+    setHighLightMaterial(highlight) {
+        this.highlight = highlight;
     }
 }
 

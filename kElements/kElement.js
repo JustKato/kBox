@@ -33,6 +33,7 @@ class kUiElement {
     Update() {
         fill(color(this.material.fill));
         stroke(color(this.material.stroke));
+        strokeWeight(this.material.weight);
     }
 
 }
