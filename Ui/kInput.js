@@ -38,9 +38,19 @@ class kInput extends kUi {
             this.renderer.material = this.highlight;
             setTimeout(() => { this.renderer.material = this.material; }, 100);
         });
+        
+        this.events.addEvent(kEvents.EVENTS.CUR_ENTER, () => {
+            console.log("Cursor Entered");
+        });
+
+        this.events.addEvent(kEvents.EVENTS.CUR_EXIT, () => {
+            console.log("Cursor Exited");
+        });
+
     }
 
     Update() {
+        this.events.Update();
         switch (this.type) {
             case INPUT_TYPE.BUTTON:
                 

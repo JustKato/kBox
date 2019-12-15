@@ -7,14 +7,15 @@ class kEvents {
      * @summary Do not manually change this.
      */
     static kEventsList = [];
+    
     target_transform = null;
+    mouse_in = false;
 
     static EVENTS = {
         CLICK:      "click",
-        RCLICK:     "right_click",
-        OBJ_ENTER:  "cursor_enter",
-        OBJ_EXIT:   "cursor_exit",
-        HOLD_DOWN:  "hold_down"
+        CUR_ENTER:  "cursor_enter",
+        CUR_EXIT:   "cursor_exit",
+        HOLD_DOWN:  "hold_down" // Will be added in the near future
     };
 
     constructor() {
@@ -110,6 +111,24 @@ class kEvents {
      */
     bindEventHandler(transform) {
         this.target_transform = transform;
+    }
+
+    Update() {
+
+        if ( !this.mouse_in ) {
+            if ( kMouse.isMouseInTransform(this.target_transform)) {
+                this.mouse_in = true;
+                this.triggerEvents(kEvents.EVENTS.CUR_ENTER, {time: new Date(), pos: [mouseX, mouseY]});
+            }
+        }
+
+        if ( this.mouse_in ) {
+            if ( !kMouse.isMouseInTransform(this.target_transform)) {
+                this.mouse_in = false;
+                this.triggerEvents(kEvents.EVENTS.CUR_EXIT, {time: new Date(), pos: [mouseX, mouseY]});
+            }
+        }
+
     }
 
     // Handle mouse pressed events
