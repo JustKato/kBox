@@ -6,6 +6,9 @@ var INPUT_TYPE = {
 }
 
 class kUi {
+
+    events = new kEvents();
+
     constructor (x, y, w, h = w, tl = 0, tr = tl, br = tr, bl = br) {
         this.renderer     = new kRect(x, y, w, h, tl, tr, br, bl); // Create the renderer
         this.highlight    = new kMaterial();

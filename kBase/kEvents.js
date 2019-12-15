@@ -8,7 +8,10 @@ class kEvents {
         HOVER:  "hover",
         PRESS:  "press"
     };
-    events = [];
+
+    constructor() {
+        this.events = [];
+    }
 
     /**
      * @summary         Remove an event by id
@@ -80,7 +83,7 @@ class kEvents {
     triggerEvents(type = kEvents.EVENTS.CLICK, params = []) {
         this.events.forEach( event => {
             if ( event.type === type ) {
-                event.action(param);
+                event.action(params);
             }
         })
     }
@@ -91,7 +94,11 @@ class kEvents {
      * @param {*} params    
      */
     triggerEventByID(id, params = []) {
-
+        this.events.forEach( event => {
+            if ( event.id === id ) {
+                event.action(params);
+            }
+        })
     }
 
 }
