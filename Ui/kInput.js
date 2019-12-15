@@ -29,6 +29,15 @@ class kInput extends kUi {
     constructor (type, x, y, w, h = w, tl = 0, tr = tl, br = tr, bl = br) {
         super(x, y, w, h, tl, tr, br , bl);
         this.type = type;
+        this.Initialize();
+        this.events.bindEventHandler(this.transform);
+    }
+
+    Initialize() {
+        this.events.addEvent(kEvents.EVENTS.CLICK, () => {
+            this.renderer.material = this.highlight;
+            setTimeout(() => { this.renderer.material = this.material; }, 100);
+        });
     }
 
     Update() {

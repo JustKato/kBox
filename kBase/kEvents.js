@@ -2,15 +2,24 @@
  * The main kBox events handler, required for handling of events
  */
 class kEvents {
+
+    /**
+     * @summary Do not manually change this.
+     */
+    static kEventsList = [];
+    target_transform = null;
+
     static EVENTS = {
-        CLICK:  "click",
-        RCLICK: "right_click",
-        HOVER:  "hover",
-        PRESS:  "press"
+        CLICK:      "click",
+        RCLICK:     "right_click",
+        OBJ_ENTER:  "cursor_enter",
+        OBJ_EXIT:   "cursor_exit",
+        HOLD_DOWN:  "hold_down"
     };
 
     constructor() {
         this.events = [];
+        kEvents.kEventsList.push(this);
     }
 
     /**
@@ -59,13 +68,7 @@ class kEvents {
      * @param {kEvents.EVENTS}     type    Will set the type of event, the default is click
      * @param {function}    action  the action to perform when the event is triggered
      */
-    setEvent(type = kEvents.EVENTS.CLICK, action = () => {}) {
-
-        let action_params = action.toString().match(/\(([^;]*)\)/g)[0].replace(/\(/g, '').replace(/\)/g, '').replace(/ /g, '').split(',');
-        if ( action_params.length > 1 )
-            kManage.error("Please deliver the parameters of the action as an array or object and handle them inside of the function");
-
-
+    addEvent(type = kEvents.EVENTS.CLICK, action = () => {}) {
         let event = {
             id    : kGenerator.generateGUID(),
             type  : type,
@@ -80,10 +83,10 @@ class kEvents {
      * @summary             Trigger all events of type
      * @param {kEvents.EVENTS} type Event types to trigger
      */
-    triggerEvents(type = kEvents.EVENTS.CLICK, params = []) {
+    triggerEvents(type = kEvents.EVENTS.CLICK, param) {
         this.events.forEach( event => {
             if ( event.type === type ) {
-                event.action(params);
+                event.action(param);
             }
         })
     }
@@ -93,12 +96,53 @@ class kEvents {
      * @param {*} id      
      * @param {*} params    
      */
-    triggerEventByID(id, params = []) {
+    triggerEventByID(id, param) {
         this.events.forEach( event => {
             if ( event.id === id ) {
-                event.action(params);
+                event.action(param);
             }
         })
     }
 
+    /**
+     * Bind the transform of an element for event handling
+     * @param {kTransform} transform The transform to bind to
+     */
+    bindEventHandler(transform) {
+        this.target_transform = transform;
+    }
+
+    // Handle mouse pressed events
+    mousePressed(event) {
+        if ( this.target_transform !== null ) {
+            if ( kMouse.isMouseInTransform(this.target_transform) )
+                this.triggerEvents(kEvents.EVENTS.CLICK, event);
+        }
+    }
+
 }
+
+function mousePressed(event) {
+    kEvents.kEventsList.forEach(listener => {
+        listener.mousePressed(event);
+    })
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
