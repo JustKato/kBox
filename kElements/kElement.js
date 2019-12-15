@@ -1,12 +1,12 @@
 /**
  * @summary     The element that all kClasses inherit, this will allow event listening, reacting, all the base functionality, etc...
  */
-class kUiElement {
+class kElement {
     event       = null;
     transform   = null;
     material    = null;
     
-    active      = false
+    active      = true;
     
     /**
      * @param {float} x X Position
@@ -31,8 +31,8 @@ class kUiElement {
      * @summary This function runs the logic of the class and renders it if need-be
      */
     Update() {
-        fill(color(this.material.fill));
-        stroke(color(this.material.stroke));
+        fill(this.material.color);
+        stroke(this.material.stroke);
         strokeWeight(this.material.weight);
     }
 

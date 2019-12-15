@@ -7,13 +7,22 @@ var INPUT_TYPE = {
 
 class kUi {
 
-    events = new kEvents();
+    events      = new kEvents();
+    active      = true;
 
     constructor (x, y, w, h = w, tl = 0, tr = tl, br = tr, bl = br) {
         this.renderer     = new kRect(x, y, w, h, tl, tr, br, bl); // Create the renderer
         this.highlight    = new kMaterial();
         this.material     = this.renderer.material;
         this.transform    = this.renderer.transform; // Reference the transform
+    }
+
+    /**
+     * 
+     * @param {boolean} active Activate or deactivate the element, undefined = toggle
+     */
+    toggleElement(active = undefined) {
+        this.active = (active == undefined) ? !this.active : active;
     }
 
     /**
@@ -34,23 +43,29 @@ class kInput extends kUi {
     }
 
     Initialize() {
-        this.events.addEvent(kEvents.EVENTS.CLICK, () => {
-            this.renderer.material = this.highlight;
-            setTimeout(() => { this.renderer.material = this.material; }, 100);
-        });
-        
-        this.events.addEvent(kEvents.EVENTS.CUR_ENTER, () => {
-            console.log("Cursor Entered");
-        });
 
-        this.events.addEvent(kEvents.EVENTS.CUR_EXIT, () => {
-            console.log("Cursor Exited");
-        });
+        switch (this.type) {
+            case INPUT_TYPE.BUTTON:
+                
+                break;
+        
+            case INPUT_TYPE.NUMBER:
+                
+                break;
+        
+            case INPUT_TYPE.SLIDER:
+                
+                break;
+        
+            case INPUT_TYPE.TEXT:
+                
+                break;
+        }
 
     }
 
     Update() {
-        this.events.Update();
+        if ( !this.active ) return;
         switch (this.type) {
             case INPUT_TYPE.BUTTON:
                 
@@ -69,7 +84,7 @@ class kInput extends kUi {
                 break;
         }
         
-        
+        this.events.Update();
         this.renderer.Update();
     }
 

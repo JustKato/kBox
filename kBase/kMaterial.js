@@ -3,14 +3,14 @@
  */
 class kMaterial {
     
+    color   = [255, 255, 255, 255];
     stroke = [0, 0, 0, 255];
+    
     weight = 0;
-
-    fill   = [255, 255, 255, 255];
 
     constructor(new_stroke = undefined, new_fill = undefined) {
         this.stroke = new_stroke ? new_stroke : this.stroke;
-        this.fill   = new_fill   ? new_fill   : this.fill;
+        this.color  = new_fill   ? new_fill   : this.color;
     }
 
     /**
@@ -32,7 +32,7 @@ class kMaterial {
      * @param {int} a Alpha
      */
     setStroke(r, g, b, a = 255) {
-        this.fill = [r, g, b, a];
+        this.stroke = [r, g, b, a];
     }
     
     /**
