@@ -1,16 +1,18 @@
-class kRect extends kElement {
-    constructor(x, y, w, h = undefined, tl = undefined, tr = undefined, br = undefined, bl = undefined) {
+/**
+ * @summary p5.js react equivalent, but has events, handlers, etc...
+ */
+class kRect extends kUiElement {
+    constructor(x, y, w, h = w, tl = undefined, tr = undefined, br = undefined, bl = undefined) {
         super(x, y, w, h);
-        if ( h == undefined ) h = w;
         this.tl = tl;   this.tr = tr;   this.br = br;   this.bl = bl;
     }
 
     /**
-     * @summary Draw the element, this has to be called in the draw() method of p5.js
+     * @summary This function runs the logic of the class and renders it if need-be
      */
-    Draw() {
-        super.Draw();
-        rect(this.x, this.y, this.w, this.h, this.tl, this.tr, this.br, this.bl);
+    Update() {
+        super.Update();
+        rect(this.transform.x, this.transform.y, this.transform.w, this.transform.h, this.tl, this.tr, this.br, this.bl);
     }
 
 }

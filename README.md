@@ -1,7 +1,7 @@
 # Kbox
 
 ## Description
-Welcome to **kBox**! The one and only [p5.js](https://p5js.org/) library you'll need, handling all your needs such as the basics ( MouseControllers, Keyboard inputs, Events, etc.. ) along with UI and all the animations you'd need for it!  
+Welcome to **kBox**! The one and only [p5.js](https://p5js.org/) library you'll need, covering a wide range of your needs such as the basics ( MouseControllers, Keyboard inputs, Events, etc.. ) along with UI and all the animations you'd need for it!  
 Have I told you that it also has a collision engine?
 
 ## Features

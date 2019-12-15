@@ -1,28 +1,36 @@
 /**
  * @summary     The element that all kClasses inherit, this will allow event listening, reacting, all the base functionality, etc...
  */
-class kElement {
-    event = null;
+class kUiElement {
+    event       = null;
+    active      = false
+    transform   = null;
 
+    /**
+     * @param {float} x X Position
+     * @param {float} y y Position
+     * @param {float} w Width
+     * @param {float} h Height
+     */
     constructor(x, y, w, h) {
-        this.x = x;     this.y = y;     this.w = w;     this.h = h;
+        this.transform = new kTransform(x, y, w, h);
+        this.material  = new kMaterial();
     }
     
     /**
-     * @summary             Attach an event action to the object
-     * @description         This function will attach an event TYPE to the object and run the ACTION, 
-     *                      if the element isn't being drawn it won't react to events
      * 
-     * @param {kEvents}     type    Will set the type of event, the default is click
-     * @param {function}    action  the action to perform when the event is triggered
+     * @param {boolean} active Activate or deactivate the element, undefined = toggle
      */
-    setEvent(type = kEvents.click, action = () => {}) {
-        this.event.type     = type;
-        this.event.action   = action;
+    toggleElement(active = undefined) {
+        this.active = (active == undefined) ? !this.active : active;
     }
 
-    Draw() {
-
+    /**
+     * @summary This function runs the logic of the class and renders it if need-be
+     */
+    Update() {
+        fill(color(this.material.fill));
+        stroke(color(this.material.stroke));
     }
 
 }
