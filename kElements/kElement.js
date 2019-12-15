@@ -3,9 +3,11 @@
  */
 class kUiElement {
     event       = null;
-    active      = false
     transform   = null;
-
+    material    = null;
+    
+    active      = false
+    
     /**
      * @param {float} x X Position
      * @param {float} y y Position

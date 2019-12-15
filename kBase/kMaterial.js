@@ -13,6 +13,17 @@ class kMaterial {
         this.fill   = new_fill   ? new_fill   : this.fill;
     }
 
+    setFill(r, g, b, a = 255) {
+        this.fill = [r, g, b, a];
+    }
+
+    setStroke(r, g, b, a = 255) {
+        this.fill = [r, g, b, a];
+    }
+
+    setStrokeWeight(weight) {
+        this.weight;
+    }
 
 
 }
